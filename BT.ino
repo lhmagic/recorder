@@ -1,6 +1,7 @@
 #define   bt_serial   Serial2
-#define   slave_id    "0x001583003E04"
 #define   bt_status   2
+
+static String ID = "0x000000000000";
 
 enum ebt_fsm{
   INIT,
@@ -11,7 +12,8 @@ enum ebt_fsm{
 
 ebt_fsm bt_fsm;
 
-void btInit(void) {
+void btInit(String bID) {
+  ID = bID;
   pinMode(bt_status, INPUT);
   bt_serial.begin(115200);
   bt_serial.setTimeout(10);
@@ -52,7 +54,7 @@ static String buf ;
         if(buf.indexOf("+INQE") != -1) {
           while((index=buf.indexOf("+INQ:", offset)) != -1) {
             id[i%8] = buf.substring(index+7, index+21);
-            if(id[i].equals(slave_id)) {
+            if(id[i].equals(ID)) {
               bt_serial.print("AT+CONN");bt_serial.println(i+1);
               bt_fsm = CONNECT;
               timeout = 0;
