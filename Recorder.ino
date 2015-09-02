@@ -16,11 +16,11 @@ void setup() {
 void loop() {
   String record = getGPS();
   if (record.length() != 0) {
-    record += getTemperature()+getSealevelPressure()+\
-              getHeadingDegrees()+getGyro()+getAccel()+getHeartRate();  
+    record += getHeadingDegrees()+getTemperature()+\
+              getSealevelPressure()+getAccel()+getGyro()+getHeartRate();  
 //    if(getFileSize(fileName) >= 100) {
 //      fileName = nextFileName(dirName, filePrefix)+".TXT";
-//    }
+//    }`
     writeLine(fileName, record);
 //    Serial.println(record);
   }
