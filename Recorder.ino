@@ -5,6 +5,7 @@ String    fileName = "RECORD.TXT";
 
 void setup() {
   Serial.begin(115200);
+  wlInit();
   sensorInit();
   gpsInit();
   sdInit();
@@ -14,14 +15,18 @@ void setup() {
 }
 
 void loop() {
-  String record = getGPS();
+String heartRate;  
+String record = getGPS();
+
   if (record.length() != 0) {
+    heartRate = getHeartRate();
     record += getHeadingDegrees()+getTemperature()+\
-              getSealevelPressure()+getAccel()+getGyro()+getHeartRate();  
+              getSealevelPressure()+getAccel()+getGyro()+heartRate;
 //    if(getFileSize(fileName) >= 100) {
 //      fileName = nextFileName(dirName, filePrefix)+".TXT";
 //    }`
     writeLine(fileName, record);
+    wlSend("$"+bluetoothID+" "+getRFData()+heartRate);
 //    Serial.println(record);
   }
 }

@@ -7,6 +7,10 @@
 
 String GPS_DATA[32];
 
+String RFLatitude;
+String RFLongitude;
+String RFSpeed;
+
 void gpsInit(void) {
   //  gps_serial.begin(4800);
   //  gps_serial.println("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28"); //RMC GGA
@@ -45,6 +49,11 @@ String getGPS(void) {
         char v[12]; dtostrf(GPS_DATA[7].toFloat()*KNOT2KMPH, 2, 2, v);
         curSpeed = v; curSpeed += " ";
       }
+
+      RFLatitude = curLatitude;
+      RFLongitude = curLongitude;
+      RFSpeed = curSpeed;
+      
       return (curTime+curLatitude+curLongitude+curAltitude+curSpeed);
     }
   }
@@ -88,6 +97,10 @@ int8_t gpsParse(String nmea) {
     }
   }
   return ret;
+}
+
+String getRFData(void) {
+  return RFLatitude+" "+RFLongitude+" "+RFSpeed+" ";
 }
 
 String localeTime(String curTime)  {   //hour, minite, second, day, month, year
