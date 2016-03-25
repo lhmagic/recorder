@@ -23,7 +23,7 @@ void setup() {
   gen_readme();
   getConfig("CONFIG.TXT");
   btInit(bluetoothID);
-  press_cnt = 0;
+  press_cnt = 1;
 
   timer = millis();
 }
