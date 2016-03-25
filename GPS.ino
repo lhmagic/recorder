@@ -21,6 +21,10 @@ void gpsInit(void) {
   gps_serial.flush();
 }
 
+void gpsflush(void) {
+  gps_serial.flush();
+}
+
 String getGPS(void) {
   String  NMEA;
   String curTime, curLatitude, curLongitude, curAltitude, curSpeed;

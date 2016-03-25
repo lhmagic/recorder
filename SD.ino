@@ -2,7 +2,12 @@
 #include <SPI.h>
 #include <SD.h>
 
-#define   WR_LED   13
+//50--MISO
+//51--MOSI
+//52--SCK
+//53--SS
+
+#define   WR_LED   3
 
 Sd2Card card;
 void(* resetFunc) (void) = 0;
@@ -11,7 +16,8 @@ void sdInit(void) {
   digitalWrite(WR_LED, HIGH);
   pinMode(WR_LED, OUTPUT);
   if(!SD.begin()) {
-    Serial.println("SD init failed!");
+    Serial.println("SD card init failed!");
+    oled_disp_err("SD card init failed!");
     delay(10);
     resetFunc();
   }

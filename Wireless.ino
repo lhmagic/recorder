@@ -1,20 +1,17 @@
 #define   wlSerial  Serial1
 
-//void setup() {//  // put your setup code here, to run once:
-//  Serial.begin(115200);
-//}
-//
-//void loop() {
-//  // put your main code here, to run repeatedly:
-//  wlSend("Hello");
-//  delay(1000);
-//}
-
 void wlInit(void) {
-  wlSerial.begin(115200);
+  wlSerial.begin(115200, SERIAL_8O1);
+  wlSerial.setTimeout(10);
 }
 
-void wlSend(String msg) {
-  wlSerial.println(msg);
+void rfHandle(String s) {
+  if(wlSerial.available()) {
+    String buf;
+    buf = wlSerial.readStringUntil('\n');
+    if(buf.equals("R\r")) {
+       wlSerial.println(s); 
+    }
+  }
 }
 

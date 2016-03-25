@@ -5,6 +5,10 @@
 #include <Adafruit_HMC5883_U.h>
 #include <Adafruit_L3GD20.h>
 
+//修改Adafruit_L3GD20.h中一下两个参数以使用L3G4200D
+//#define L3GD20_ADDRESS                (0x69)        //L3G4200D
+//#define L3GD20_ID                     0xD3          //L3G4200D  
+
 Adafruit_BMP085 bmp;
 Adafruit_L3GD20 gyro;
 Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(345);
